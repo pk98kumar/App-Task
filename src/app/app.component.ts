@@ -15,27 +15,29 @@ export class AppComponent {
   title = 'formsApp';
 
 
-UsersData:Users = new Users ();
+UsersData:Users = new Users();
   data: any;
- address:Address =new Address()
+address:Address =new Address()
 
-//  ngOnInit() {
-//   this.UsersData.address?.push(this.address)
-//  }
+ ngOnInit() {
+  this.UsersData.address.push(this.address)
+ }
 
-onSubmit(RegisterForm:NgForm){
-    this.data = RegisterForm.value
+onSubmit(){
+    //this.data = RegisterForm.value
    this.data = this.UsersData
   console.log(this.data ,"user Data");
 }
 
 
 addNewDiv() {
-this.UsersData.address?.push(new Address())
-
+  console.log("Before lopg", this.UsersData.address)
+  this.address = new Address();
+this.UsersData.address.push(this.address)
+console.log("Adfter lopg", this.UsersData.address)
 }
-removeAddress(id:any){
-  this.UsersData.address?.splice(id,1)
+removeAddress(index:number){
+  this.UsersData.address?.splice(index,1)
 }
 
 
