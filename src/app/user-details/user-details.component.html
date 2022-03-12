@@ -1,0 +1,65 @@
+<div>
+  <div class="d-flex float-end my-4">
+    <div class="form-group  float-end ">
+      <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchkey">
+    </div>
+    <div>
+      <button class="btn btn-primary mx-3" (click)="SearchData(searchkey)" >Search</button>
+    </div>
+  </div>
+    <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Address</th>
+            <th>Card Details</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let details of profileData;index as i">
+                <td>{{details.name}}</td>
+                <td>{{details.mobileNumber}}</td>
+                <td>{{details.email}}</td>
+                <td>{{details.password}}</td>
+                <td>
+                    <div *ngFor="let AddressData of details.address; index as i">
+                       <span class="text-success">Address No:-{{i+1}}</span>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Address Line 1 :- {{AddressData.addressLine1}}</li>
+                              <li class="list-group-item"> Address Line 2 :- {{AddressData.addressLine2}}</li>
+                              <li class="list-group-item">Country :- {{AddressData.country}}</li>
+                              <li class="list-group-item">State :- {{AddressData.state}}</li>
+                            </ul>
+                          </div>
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let CardData of details.cardDetails; index as i">
+                       <span class="text-success">Card Details:-{{i+1}}</span>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Card Number :- {{CardData.cardNumber}}</li>
+                              <li class="list-group-item">Card Holder Name :- {{CardData.cardHolderName}}</li>
+                              <li class="list-group-item">Bank Name :- {{CardData.bankName}}</li>
+                              <li class="list-group-item">Branch Name :- {{CardData.branchName}}</li>
+                            </ul>
+                          </div>
+                    </div>
+                </td>
+                <td>
+                <div class="my-5">
+                    <a class="btn btn-primary" (click)="userData(details.email)"> Edit User</a>
+                    <a class="btn btn-danger ms-4" (click)="removeUser(i)"> Delete User</a>
+                </div>
+                </td>
+
+            </tr>
+         
+        </tbody>
+       </table>
+</div>

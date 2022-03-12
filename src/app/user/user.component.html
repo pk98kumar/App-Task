@@ -1,0 +1,100 @@
+<div class="container">
+    <form class="mt-5" #RegisterForm="ngForm" (ngSubmit)="onSubmit(RegisterForm)">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="Name">User Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="User name"
+                    [(ngModel)]="UsersData.name">
+            </div>
+            <div class="form-group col-md-3 mt-3">
+                <label for="Email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+                    [(ngModel)]="UsersData.email">
+            </div>
+            <div class="form-group col-md-3 mt-3">
+                <label for="Email">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"
+                    [(ngModel)]="UsersData.password">
+            </div>
+            <div class="form-group col-md-3 mt-3">
+                <label for="Name">Mobile Number</label>
+                <input type="text" class="form-control" id="mobileNumber" name="mobileNumber"
+                    placeholder="Mobile Number" [(ngModel)]="UsersData.mobileNumber">
+            </div>
+        </div>
+
+        <div class=" float-end mt-2">
+            <label for=""> Add Address</label><br>
+            <a (click)="addNewDiv()" style=> <i class="fa fa-plus-square" style="font-size:36px;color:red"></i></a>
+        </div>
+        <article *ngFor="let placedata of UsersData.address;index as i">
+            <!-- {{placedata |json}} -->
+            <div class="row">
+                <div class="form-group mt-3 col-md-3">
+                    <label for="Address">Address Line1</label>
+                    <input type="text" class="form-control" name="addressLine1{{i}}" placeholder="Address line 1"
+                        [(ngModel)]="placedata.addressLine1">
+                </div>
+                <div class="form-group mt-3 col-md-3">
+                    <label for="Address">Address Line2</label>
+                    <input type="text" class="form-control" name="addressLine2{{i}}" placeholder="Address line 2"
+                        [(ngModel)]="placedata.addressLine2">
+                </div>
+                <div class="form-group mt-3 col-md-3">
+                    <label for="Country">Country</label>
+                    <input type="text" class="form-control" name="country{{i}}" placeholder="country"
+                        [(ngModel)]="placedata.country">
+                </div>
+                <div class="form-group mt-3 col-md-2">
+                    <label for="State">State</label>
+                    <input type="text" class="form-control" placeholder="state" name="state{{i}}"
+                        [(ngModel)]="placedata.state">
+                </div>
+                <div class="col-md-1">
+                    <label for="">Remove </label>
+                    <a (click)="removeAddress(i)" style="font-size:36px"><i class="fa fa-minus-square"></i></a>
+                </div>
+            </div>
+            <!-- {{placedata | json}} -->
+        </article>
+        <div class="mt-5 text-danger">Please Fill The Card Details *</div>
+        <hr>
+        <div class=" float-end mt-4">
+            <label for="">Add Card</label><br>
+            <a (click)="addNewCard()" style=> <i class="fa fa-plus-square" style="font-size:36px;color:red"></i></a>
+        </div>
+        <ng-container *ngFor="let cardData of UsersData.cardDetails;index as i">
+            <div class="row mt-5">
+                <div class="form-group col-md-3">
+                    <label for="Card">Card Number</label>
+                    <input type="text" class="form-control" name="cardNumber{{i}}" placeholder="Card Number"
+                        [(ngModel)]="cardData.cardNumber">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="Card">Card Holder Name</label>
+                    <input type="text" class="form-control" name="cardHolderName{{i}}" placeholder="Card Holder Name"
+                        [(ngModel)]="cardData.cardHolderName">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Card">Bank Name</label>
+                    <input type="text" class="form-control" name="bankName{{i}}" placeholder="Bank Name"
+                        [(ngModel)]="cardData.bankName">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Card">Branch Name</label>
+                    <input type="text" class="form-control" name="branchName{{i}}" placeholder="Branch Name"
+                        [(ngModel)]="cardData.branchName">
+                </div>
+                <div class="col-md-1">
+                    <label for="">Remove</label>
+                    <a (click)="removeCard(i)" style="font-size:36px"><i class="fa fa-minus-square"></i></a>
+                </div>
+            </div>
+        </ng-container>
+
+
+        <button type="submit" class="btn btn-primary mt-3 mx-5">{{editMode? 'Update User': 'Add User'}}</button>
+    </form>
+
+    <a class="btn btn-primary mt-5" (click)="showTables()"> View Details</a>
+</div>

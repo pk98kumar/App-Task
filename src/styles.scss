@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+.table thead th{
+    font-weight: 700 !important;
+}
+.table{
+    thead {
+        background-color: aqua;
+        tr{
+            th{
+                border :1px solid #dee2e6 !important;
+                text-align: left !important;
+            }
+            th.text-center{
+                text-align: center !important;
+            }
+            th.min-width-150{
+                min-width: 150px;
+            }
+        }
+    }
+    tbody {
+        tr{
+            td{
+                border :1px solid #dee2e6 !important;
+                text-align: left !important;
+            }
+            td.text-center{
+                text-align: center !important;
+            }
+        }
+    }
+}
+.modal-header{
+    background-color: aqua;
+}
+h4{
+    color: #222e55;
+}
+p{
+    color: #7f94a1;
+}

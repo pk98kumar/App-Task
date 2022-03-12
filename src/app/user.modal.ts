@@ -1,4 +1,5 @@
 import { Address } from "./address.modal";
+import { CardDetails } from "./cardDetails.modal";
 
 
 
@@ -9,6 +10,7 @@ export class Users {
   password: string = '';
   mobileNumber: string = '';
   address: Address[] = [];
+  cardDetails:CardDetails[] = []
 
   // constructor(
   //   public name: string,
