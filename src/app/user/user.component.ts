@@ -18,7 +18,9 @@ export class UserComponent implements OnInit {
   data: any;
   address: Address = new Address();
   cardDetails: CardDetails = new CardDetails();
-  UserEmail:string='';
+  UserEmail: string = '';
+  serchData: Users = new Users();
+  searchKey:string=''
  
   constructor(private routes: Router, private route: ActivatedRoute,) { }
 
@@ -46,7 +48,22 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(RegisterForm: NgForm) {
-    console.log(this.data, "user Data");
+    let UData:Users = RegisterForm.value
+
+    this.searchKey = JSON.stringify(UData)
+    this.serchData = JSON.parse(this.UsersData.searchKey)
+    let finalSearchKey = this.UsersData.name + this.UsersData.email + this.UsersData.mobileNumber  ;
+    // console.log(this.UsersData.address.map(finalSearchKey => { return finalSearchKey.concat(this.address.addressLine1 )} ));
+   let AddressData = this.UsersData.address.map(finalSearchKey => finalSearchKey.addressLine1 + finalSearchKey.addressLine2 + finalSearchKey.country + finalSearchKey.state)
+   let CardData= this.UsersData.cardDetails.map(finalSearchKey => finalSearchKey.cardHolderName + finalSearchKey.cardNumber + finalSearchKey.bankName + finalSearchKey.cardHolderName)
+    // let searchkeyValue = serchData.name + serchData.email + serchData.password + serchData.mobileNumber + serchData.addressLine1 + serchData.addressLine2 +
+    //   serchData.country + serchData.state + serchData.cardNumber + serchData.cardHolderName
+
+    //   + serchData.bankName + serchData.branchName
+    console.log(finalSearchKey + AddressData + CardData);
+    
+
+    console.log(this.UsersData, "user Data");
     if (this.editMode == true) {
       this.UsersData = RegisterForm.value
     } else {

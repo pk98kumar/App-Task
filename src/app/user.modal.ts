@@ -9,6 +9,7 @@ export class Users {
   email: string = '';
   password: string = '';
   mobileNumber: string = '';
+  searchKey: string = '';
   address: Address[] = [];
   cardDetails:CardDetails[] = []
 
