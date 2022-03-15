@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Users } from '../user.modal';
 
 
 @Component({
@@ -10,15 +11,14 @@ import { Router } from '@angular/router';
 export class UserDetailsComponent implements OnInit {
   Data:any=''
   profileData:any=''
-  searchkey:string=''
+  key:string=''
   ALLData: any;
   constructor(private routes: Router) { }
 
   ngOnInit(): void {
    this.Data = localStorage.getItem('prince');
-    this.profileData = JSON.parse(this.Data);
-    
-    this.ALLData = this.profileData //copy
+    this.profileData = JSON.parse(this.Data); 
+    this.ALLData = JSON.parse(this.Data); //copy
   }
   userData(email: string) {
     this.routes.navigateByUrl('User' +'/'+ email);
@@ -30,21 +30,40 @@ export class UserDetailsComponent implements OnInit {
     localStorage.setItem('prince', JSON.stringify(this.profileData));
   }
   SearchData(e: string) {
-    this.searchkey = e
-    this.ALLData = this.profileData
-    let prince = this.searchkey
-    if (prince != 'all') {
-      this.ALLData.forEach((user: any) => {
-        let add: any[] = [];
-        user.cardDetails.forEach((t: any) => {
-          if (t == prince) {
-            add[0].push(t);
-            console.log(t);
-          }
-        });
-        user.cardDetails = add;
-      });
-    }
+      this.profileData = this.ALLData;
+      this.key = e
+      console.log(this.key);
+  
+        // 2nd  Approch to use filter in easy way
+
+      this.profileData = this.profileData.filter((p: Users) => {
+        let val = Object.values(p).toString() + Object.values(p.address.map(a => Object.values(a))).toString() + Object.values(p.cardDetails.map(c => Object.values(c))).toString();
+        return val.includes(e);
+      })
+   
+    // 1st  Approch to use filter
+    
+    // let temp:Users[] = []
+    //   this.ALLData.filter((sKey: Users) => {
+    //     // for (let i = 0; i < this.profileData.length; i++) {
+    //     if (sKey.searchKey.includes(this.key)) {
+    //       console.log(sKey);
+    //       temp.push(sKey)
+    //     }
+    //   // }
+    //   })
+    
+    // this.profileData = temp;
+
+  }
+
+  paginate(event: any) {
+    this.profileData = this.ALLData;
+    console.log(event.target.value);
+    let value = event.target.value;
+
+    this.profileData.splice(value)
+    this.profileData = this.ALLData;
   }
 
 }

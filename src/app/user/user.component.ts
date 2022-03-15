@@ -48,10 +48,10 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(RegisterForm: NgForm) {
-    let UData:Users = RegisterForm.value
+    // let UData:Users = RegisterForm.value
 
-    this.searchKey = JSON.stringify(UData)
-    this.serchData = JSON.parse(this.UsersData.searchKey)
+    // this.searchKey = JSON.stringify(UData)
+    // this.serchData = JSON.parse(this.UsersData.searchKey)
     let finalSearchKey = this.UsersData.name + this.UsersData.email + this.UsersData.mobileNumber  ;
     // console.log(this.UsersData.address.map(finalSearchKey => { return finalSearchKey.concat(this.address.addressLine1 )} ));
    let AddressData = this.UsersData.address.map(finalSearchKey => finalSearchKey.addressLine1 + finalSearchKey.addressLine2 + finalSearchKey.country + finalSearchKey.state)
@@ -60,9 +60,9 @@ export class UserComponent implements OnInit {
     //   serchData.country + serchData.state + serchData.cardNumber + serchData.cardHolderName
 
     //   + serchData.bankName + serchData.branchName
-    console.log(finalSearchKey + AddressData + CardData);
-    
 
+    console.log(finalSearchKey + AddressData + CardData);
+    this.UsersData.searchKey = finalSearchKey + AddressData + CardData
     console.log(this.UsersData, "user Data");
     if (this.editMode == true) {
       this.UsersData = RegisterForm.value
